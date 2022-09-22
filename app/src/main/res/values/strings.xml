@@ -3,4 +3,6 @@
     <string name="hint_user">Username</string>
     <string name="help_require">Obligatorio</string>
     <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm password</string>
+    <string name="register_title">Register form</string>
 </resources>
