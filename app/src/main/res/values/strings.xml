@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Mosca</string>
+    <string name="hint_user">Username</string>
+    <string name="help_require">Obligatorio</string>
+    <string name="hint_password">Password</string>
 </resources>
