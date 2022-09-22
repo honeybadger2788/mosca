@@ -5,4 +5,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm password</string>
     <string name="register_title">Register form</string>
+    <string name="hint_description">Description</string>
+    <string name="expenses">Expenses</string>
+    <string name="home_title">Home</string>
 </resources>

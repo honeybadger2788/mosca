@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnLogin.setOnClickListener{
             if(binding.etUsername.text.toString().isNotBlank() && binding.etPassword.text.toString().isNotBlank()){
-                startActivity(Intent(this, RegisterActivity::class.java))
+                startActivity(Intent(this, HomeActivity::class.java))
             } else {
                 showMessage("Algo salió mal")
             }
