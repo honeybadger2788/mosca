@@ -24,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         binding.btnRegister.setOnClickListener{
             showMessage("Hora de registrarse")
         }
+
+        binding.cbRememberme.setOnCheckedChangeListener { compoundButton, b ->
+            if(binding.cbRememberme.isChecked){
+                showMessage("No me olvides!")
+            } else {
+                showMessage("Olvidate de mi!")
+            }
+        }
     }
 
     private fun showMessage(msg: String){
