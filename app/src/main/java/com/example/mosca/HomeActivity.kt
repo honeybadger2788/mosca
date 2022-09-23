@@ -1,5 +1,6 @@
 package com.example.mosca
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,10 @@ class HomeActivity: AppCompatActivity()  {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = expensesAdapter
         }
-        
+
+        binding.btnAdd.setOnClickListener{
+            startActivity(Intent(this, ExpenseFormActivity::class.java))
+        }
     }
 
     override fun onStart() {

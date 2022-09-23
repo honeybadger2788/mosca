@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/activity_expense_form.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/activity_home.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/activity_main.xml" value="0.259375" />
         <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/activity_register.xml" value="0.25833333333333336" />
+        <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/item_category.xml" value="0.25833333333333336" />
         <entry key="..\:/Users/caros/AndroidStudioProjects/Mosca/app/src/main/res/layout/item_expense.xml" value="0.259375" />
       </map>
     </option>
