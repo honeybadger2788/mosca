@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar
 class HomeActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var expensesAdapter: ExpensesAdapter
+    private var budget = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +54,8 @@ class HomeActivity: AppCompatActivity()  {
     }
 
     private fun addExpenseAuto(expense: Expense) {
+        budget += expense.amount
+        binding.tvAmount.text = "$ $budget"
         expensesAdapter.add(expense)
     }
 
