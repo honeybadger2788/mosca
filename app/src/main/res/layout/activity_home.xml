@@ -34,10 +34,11 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="75"
+                android:layout_weight="60"
                 android:hint="@string/hint_description"
                 app:counterEnabled="true"
                 app:counterMaxLength="@integer/description_max_length"
+                app:helperText="@string/help_require"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etDescription"
@@ -50,10 +51,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="25"
+                android:layout_weight="40"
                 android:hint="@string/hint_amount"
-                app:counterEnabled="true"
-                app:counterMaxLength="@integer/description_max_length"
+                app:helperText="+/-100.00"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAmount"
@@ -63,7 +63,6 @@
                     android:inputType="numberDecimal|numberSigned"
                     android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
-
             <ImageButton
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
