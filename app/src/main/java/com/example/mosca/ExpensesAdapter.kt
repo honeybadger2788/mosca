@@ -1,11 +1,13 @@
 package com.example.mosca
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
+import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosca.databinding.ItemExpenseBinding
 import kotlin.math.sign
@@ -29,9 +31,11 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>):
         if (expense.amount < 0){
             val outcomeIcon = getDrawable(context,R.drawable.ic_arrow_downward)
             holder.binding.imgCategory.setImageDrawable(outcomeIcon)
+            holder.binding.imgCategory.setColorFilter(getColor(context,R.color.red))
         } else {
             val incomeIcon = getDrawable(context,R.drawable.ic_arrow_upward)
             holder.binding.imgCategory.setImageDrawable(incomeIcon)
+            holder.binding.imgCategory.setColorFilter(getColor(context,R.color.green))
         }
     }
 
