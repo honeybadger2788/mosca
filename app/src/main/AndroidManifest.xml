@@ -22,10 +22,6 @@
             android:exported="false"
             android:label="@string/home_title"/>
         <activity
-            android:name=".ExpenseFormActivity"
-            android:exported="false"
-            android:label="@string/form_title"/>
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

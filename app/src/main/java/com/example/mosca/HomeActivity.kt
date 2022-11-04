@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosca.databinding.ActivityHomeBinding
+import com.google.android.material.snackbar.Snackbar
 
 class HomeActivity: AppCompatActivity()  {
     private lateinit var binding: ActivityHomeBinding
@@ -21,8 +22,16 @@ class HomeActivity: AppCompatActivity()  {
             adapter = expensesAdapter
         }
 
-        binding.btnAdd.setOnClickListener{
-            startActivity(Intent(this, ExpenseFormActivity::class.java))
+        binding.btnAdd.setOnClickListener {
+            if (binding.etDescription.text.toString()
+                    .isNotBlank() && binding.etAmount.text.toString().isNotBlank()
+            ) {
+                val expense = Expense(
+                    description = binding.etDescription.text.toString().trim(),
+                    amount = binding.etAmount.text.toString().trim().toDouble()
+                )
+                addExpenseAuto(expense)
+            }
         }
     }
 
@@ -35,7 +44,8 @@ class HomeActivity: AppCompatActivity()  {
         val data = mutableListOf(
             Expense(1, "Food", -5000.00),
             Expense(2,"Home", -10000.00),
-            Expense(3,"Entertainment", -1000.00))
+            Expense(3,"Salary", 10000.00),
+            Expense(4,"Entertainment", -1000.00))
 
         data.forEach{expense ->
             addExpenseAuto(expense)
@@ -44,5 +54,9 @@ class HomeActivity: AppCompatActivity()  {
 
     private fun addExpenseAuto(expense: Expense) {
         expensesAdapter.add(expense)
+    }
+
+    private fun showMessage(msg: String){
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
     }
 }
