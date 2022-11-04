@@ -24,15 +24,17 @@ class HomeActivity: AppCompatActivity()  {
         }
 
         binding.btnAdd.setOnClickListener {
-            if (binding.etDescription.text.toString()
-                    .isNotBlank() && binding.etAmount.text.toString().isNotBlank()
-            ) {
+            if (binding.etDescription.text.toString().isNotBlank()
+                && binding.etAmount.text.toString().isNotBlank()) {
                 val expense = Expense(
                     description = binding.etDescription.text.toString().trim(),
                     amount = binding.etAmount.text.toString().trim().toDouble()
                 )
                 addExpenseAuto(expense)
-            }
+            } else if (binding.etDescription.text.toString().isBlank())
+                binding.etDescription.error = getString(R.string.validation_field_required)
+            else
+                binding.etAmount.error = getString(R.string.validation_field_required)
         }
     }
 
