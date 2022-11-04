@@ -31,6 +31,9 @@ class HomeActivity: AppCompatActivity()  {
                     amount = binding.etAmount.text.toString().trim().toDouble()
                 )
                 addExpenseAuto(expense)
+                binding.etDescription.text?.clear()
+                binding.etAmount.text?.clear()
+                showMessage("Operación exitosa")
             } else if (binding.etDescription.text.toString().isBlank())
                 binding.etDescription.error = getString(R.string.validation_field_required)
             else
