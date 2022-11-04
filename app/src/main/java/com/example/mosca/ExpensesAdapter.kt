@@ -6,13 +6,14 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosca.databinding.ItemExpenseBinding
 import kotlin.math.sign
 
-class ExpensesAdapter(var expenseList: MutableList<Expense>):
+class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listener: OnClickListener):
     RecyclerView.Adapter<ExpensesAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -25,6 +26,8 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>):
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val expense = expenseList.get(position)
+
+        holder.setListener(expense)
 
         with(holder.binding){
             tvCategory.text = expense.description
@@ -45,10 +48,22 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>):
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val binding = ItemExpenseBinding.bind(view)
+
+        fun setListener(expense: Expense){
+            binding.root.setOnLongClickListener {
+                listener.onLongClick(expense, this@ExpensesAdapter)
+                true
+            }
+        }
     }
 
     fun add(expense: Expense) {
         expenseList.add(expense)
+        notifyDataSetChanged()
+    }
+
+    fun remove(expense: Expense) {
+        expenseList.remove(expense)
         notifyDataSetChanged()
     }
 }

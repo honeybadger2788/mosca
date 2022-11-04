@@ -2,12 +2,13 @@ package com.example.mosca
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosca.databinding.ActivityHomeBinding
 import com.google.android.material.snackbar.Snackbar
 
-class HomeActivity: AppCompatActivity()  {
+class HomeActivity: AppCompatActivity(), OnClickListener  {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var expensesAdapter: ExpensesAdapter
     private var budget = 0.00
@@ -17,7 +18,7 @@ class HomeActivity: AppCompatActivity()  {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        expensesAdapter = ExpensesAdapter(mutableListOf())
+        expensesAdapter = ExpensesAdapter(mutableListOf(),this)
         binding.rvExpenses.apply {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = expensesAdapter
@@ -62,6 +63,24 @@ class HomeActivity: AppCompatActivity()  {
         budget += expense.amount
         binding.tvAmount.text = "$ $budget"
         expensesAdapter.add(expense)
+    }
+
+    private fun deleteExpenseAuto(expense: Expense) {
+        budget -= expense.amount
+        binding.tvAmount.text = "$ $budget"
+       expensesAdapter.remove(expense)
+    }
+
+    override fun onLongClick(expense: Expense, currentAdapter: ExpensesAdapter) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle("¿Eliminar gasto?")
+            .setPositiveButton("Aceptar",{ dialogInterface, i ->
+                deleteExpenseAuto(expense)
+                showMessage("Eliminado exitosamente")
+            })
+            .setNegativeButton("Cancelar",null)
+
+        builder.create().show()
     }
 
     private fun showMessage(msg: String){
