@@ -26,16 +26,18 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val expense = expenseList.get(position)
 
-        holder.binding.tvCategory.text = expense.description
-        holder.binding.tvCategoryAmount.text = expense.amount.toString()
-        if (expense.amount < 0){
-            val outcomeIcon = getDrawable(context,R.drawable.ic_arrow_downward)
-            holder.binding.imgCategory.setImageDrawable(outcomeIcon)
-            holder.binding.imgCategory.setColorFilter(getColor(context,R.color.red))
-        } else {
-            val incomeIcon = getDrawable(context,R.drawable.ic_arrow_upward)
-            holder.binding.imgCategory.setImageDrawable(incomeIcon)
-            holder.binding.imgCategory.setColorFilter(getColor(context,R.color.green))
+        with(holder.binding){
+            tvCategory.text = expense.description
+            tvCategoryAmount.text = expense.amount.toString()
+            if (expense.amount < 0){
+                val outcomeIcon = getDrawable(context,R.drawable.ic_arrow_downward)
+                imgCategory.setImageDrawable(outcomeIcon)
+                imgCategory.setColorFilter(getColor(context,R.color.red))
+            } else {
+                val incomeIcon = getDrawable(context,R.drawable.ic_arrow_upward)
+                imgCategory.setImageDrawable(incomeIcon)
+                imgCategory.setColorFilter(getColor(context,R.color.green))
+            }
         }
     }
 
