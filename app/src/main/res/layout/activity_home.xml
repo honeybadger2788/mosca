@@ -56,6 +56,9 @@
                     android:inputType="textCapSentences"
                     android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <Space
+                android:layout_width="@dimen/common_padding_default"
+                android:layout_height="match_parent"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
