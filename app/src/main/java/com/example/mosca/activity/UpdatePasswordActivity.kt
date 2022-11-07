@@ -1,4 +1,4 @@
-package com.example.mosca
+package com.example.mosca.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mosca.ExpensesAdapter
 import com.example.mosca.OnClickListener
-import com.example.mosca.UpdatePasswordActivity
 import com.example.mosca.R
 import com.example.mosca.databinding.ActivityHomeBinding
 import com.example.mosca.model.Expense
@@ -109,7 +108,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                 onBackPressedDispatcher.onBackPressed()
             }
             R.id.action_profile -> {
-                val intent = Intent(this@HomeActivity,UpdatePasswordActivity::class.java)
+                val intent = Intent(this@HomeActivity, UpdatePasswordActivity::class.java)
                 intent.putExtra("email", auth.currentUser!!.email)
                 startActivity(intent)
             }
