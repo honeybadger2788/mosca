@@ -24,12 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_min"
-            android:hint="@string/hint_user"
+            android:hint="@string/hint_email"
             app:helperText="@string/help_require"
             app:startIconDrawable="@drawable/ic_person"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsername"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -72,7 +72,7 @@
                 android:maxLength="@integer/password_max_length"/>
         </com.google.android.material.textfield.TextInputLayout>
         <Button
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_default"
