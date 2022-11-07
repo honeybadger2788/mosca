@@ -12,4 +12,5 @@
     <string name="hint_amount">$</string>
     <string name="validation_field_required">Campo requerido</string>
     <string name="logout_title">Cerrar sesión</string>
+    <string name="profile_title">Perfil de usuario</string>
 </resources>
