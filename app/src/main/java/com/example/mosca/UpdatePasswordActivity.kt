@@ -3,14 +3,13 @@ package com.example.mosca
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import com.example.mosca.databinding.ActivityHomeBinding
-import com.example.mosca.databinding.ActivityProfileBinding
+import com.example.mosca.databinding.ActivityUpdatePasswordBinding
 
-class ProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileBinding
+class UpdatePasswordActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityUpdatePasswordBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivityUpdatePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
