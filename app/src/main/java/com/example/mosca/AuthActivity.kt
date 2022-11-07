@@ -24,16 +24,18 @@ class AuthActivity : AppCompatActivity() {
 
         loginUser()
 
-        binding.cbRememberme.setOnCheckedChangeListener { _, _ ->
-            if(binding.cbRememberme.isChecked){
-                showMessage("No me olvides!")
-            } else {
-                showMessage("Olvidate de mi!")
+        with(binding){
+            cbRememberme.setOnCheckedChangeListener { _, _ ->
+                if(cbRememberme.isChecked){
+                    showMessage("No me olvides!")
+                } else {
+                    showMessage("Olvidate de mi!")
+                }
             }
-        }
 
-        binding.btnRegister.setOnClickListener{
-            startActivity(Intent(this@AuthActivity, RegisterActivity::class.java))
+            btnRegister.setOnClickListener{
+                startActivity(Intent(this@AuthActivity, RegisterActivity::class.java))
+            }
         }
     }
 
