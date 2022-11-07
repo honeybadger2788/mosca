@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/common_padding_default"
-    tools:context=".RegisterActivity">
+    tools:context=".activity.RegisterActivity">
     <LinearLayout
         android:id="@+id/llLogin"
         android:layout_width="match_parent"

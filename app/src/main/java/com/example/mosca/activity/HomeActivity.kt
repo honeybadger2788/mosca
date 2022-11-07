@@ -1,14 +1,18 @@
-package com.example.mosca
+package com.example.mosca.activity
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mosca.ExpensesAdapter
+import com.example.mosca.OnClickListener
+import com.example.mosca.R
 import com.example.mosca.databinding.ActivityHomeBinding
+import com.example.mosca.model.Expense
 import com.google.android.material.snackbar.Snackbar
 
-class HomeActivity: AppCompatActivity(), OnClickListener  {
+class HomeActivity: AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var expensesAdapter: ExpensesAdapter
     private var budget = 0.00
@@ -52,7 +56,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener  {
             Expense(1, "Food", -5000.00),
             Expense(2,"Home", -10000.00),
             Expense(3,"Salary", 10000.00),
-            Expense(4,"Entertainment", -1000.00))
+            Expense(4,"Entertainment", -1000.00)
+        )
 
         data.forEach{expense ->
             addExpenseAuto(expense)
@@ -81,6 +86,11 @@ class HomeActivity: AppCompatActivity(), OnClickListener  {
             .setNegativeButton("Cancelar",null)
 
         builder.create().show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_menu,menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     private fun showMessage(msg: String){

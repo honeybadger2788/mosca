@@ -11,4 +11,5 @@
     <string name="form_title">Expenses form</string>
     <string name="hint_amount">$</string>
     <string name="validation_field_required">Campo requerido</string>
+    <string name="logout_title">Cerrar sesión</string>
 </resources>

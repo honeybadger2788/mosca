@@ -1,17 +1,14 @@
 package com.example.mosca
 
 import android.content.Context
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.content.ContextCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mosca.databinding.ItemExpenseBinding
-import kotlin.math.sign
+import com.example.mosca.model.Expense
 
 class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listener: OnClickListener):
     RecyclerView.Adapter<ExpensesAdapter.ViewHolder>() {

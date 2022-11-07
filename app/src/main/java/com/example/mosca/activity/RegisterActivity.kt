@@ -1,9 +1,10 @@
-package com.example.mosca
+package com.example.mosca.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mosca.AuthActivity
 import com.example.mosca.databinding.ActivityRegisterBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
