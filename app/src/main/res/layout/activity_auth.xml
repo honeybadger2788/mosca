@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/common_padding_default"
-    tools:context=".MainActivity">
+    tools:context=".AuthActivity">
 
     <LinearLayout
         android:id="@+id/llLogin"
@@ -21,16 +21,16 @@
             android:layout_gravity="center"
             android:src="@drawable/fly"/>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilUsername"
+            android:id="@+id/tilEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_min"
-            android:hint="@string/hint_user"
+            android:hint="@string/hint_email"
             app:helperText="@string/help_require"
             app:startIconDrawable="@drawable/ic_person"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etUsername"
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
