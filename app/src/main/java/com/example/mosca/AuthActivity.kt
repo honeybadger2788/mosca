@@ -48,7 +48,7 @@ class AuthActivity : AppCompatActivity() {
                             if(task.isSuccessful)
                                 startActivity(Intent(this@AuthActivity, HomeActivity::class.java))
                             else
-                                showMessage("Credenciales incorrectas")
+                                showMessage(task.exception?.message.toString())
                         }
                 } else {
                     showMessage("Algo salió mal")
@@ -58,8 +58,6 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun showMessage(msg: String){
-        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT)
-            .setAnchorView(binding.llLogin)
-            .show()
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_SHORT).show()
     }
 }

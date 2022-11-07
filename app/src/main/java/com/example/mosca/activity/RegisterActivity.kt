@@ -42,7 +42,7 @@ class RegisterActivity: AppCompatActivity() {
                                 if (task.isSuccessful) {
                                     startActivity(Intent(this@RegisterActivity, AuthActivity::class.java))
                                 } else {
-                                    showMessage("Algo salió mal")
+                                    showMessage(task.exception?.message.toString())
                                 }
                             }
                     }
