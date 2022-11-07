@@ -37,6 +37,15 @@ class AuthActivity : AppCompatActivity() {
         }
     }
 
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            // error al presionar el back button del celular
+            startActivity(Intent(this@AuthActivity,HomeActivity::class.java))
+        }
+    }
+
     private fun loginUser() {
         with(binding){
             btnLogin.setOnClickListener{
