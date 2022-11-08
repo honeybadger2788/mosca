@@ -53,18 +53,15 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     .collection("expenses")
                     .add(hashMapOf("description" to binding.etDescription.text.toString().trim(),
                         "amount" to binding.etAmount.text.toString().trim().toDouble()))
-                    .addOnSuccessListener { documentReference ->
-                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    .addOnSuccessListener {
+                        addExpenseAuto(expense)
+                        showMessage("Operación exitosa")
+                        binding.etDescription.text?.clear()
+                        binding.etAmount.text?.clear()
                     }
                     .addOnFailureListener { e ->
-                        Log.w(TAG, "Error adding document", e)
+                        showMessage(e.message.toString())
                     }
-
-
-                addExpenseAuto(expense)
-                binding.etDescription.text?.clear()
-                binding.etAmount.text?.clear()
-                showMessage("Operación exitosa")
             } else if (binding.etDescription.text.toString().isBlank())
                 binding.etDescription.error = getString(R.string.validation_field_required)
             else
@@ -78,16 +75,23 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     }
 
     private fun getData() {
-        val data = mutableListOf(
-            Expense(1, "Food", -5000.00),
-            Expense(2,"Home", -10000.00),
-            Expense(3,"Salary", 10000.00),
-            Expense(4,"Entertainment", -1000.00)
-        )
-
-        data.forEach{expense ->
-            addExpenseAuto(expense)
-        }
+        db.collection("users").document(auth.currentUser!!.email.toString())
+            .collection("expenses").get()
+            .addOnSuccessListener { data ->
+                if (data != null) {
+                    println(data.documents)
+                    data.documents.forEach { document ->
+                        addExpenseAuto(Expense(
+                            document.get("description") as String,
+                            document.get("amount") as Double))
+                    }
+                } else {
+                    Log.d(TAG, "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
     }
 
     private fun addExpenseAuto(expense: Expense) {
