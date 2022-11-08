@@ -22,7 +22,6 @@ class RegisterActivity: AppCompatActivity() {
 
         auth = Firebase.auth
 
-        /* Habilita la opción de VOLVER */
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         registerNewAccount()
