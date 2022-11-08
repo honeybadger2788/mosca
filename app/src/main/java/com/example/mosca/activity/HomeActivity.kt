@@ -1,7 +1,9 @@
 package com.example.mosca.activity
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -15,12 +17,14 @@ import com.example.mosca.model.Expense
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class HomeActivity: AppCompatActivity(), OnClickListener {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var expensesAdapter: ExpensesAdapter
+    private val db = Firebase.firestore
     private var budget = 0.00
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +47,20 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     description = binding.etDescription.text.toString().trim(),
                     amount = binding.etAmount.text.toString().trim().toDouble()
                 )
+
+                val email = auth.currentUser!!.email.toString()
+                db.collection("users").document(email)
+                    .collection("expenses")
+                    .add(hashMapOf("description" to binding.etDescription.text.toString().trim(),
+                        "amount" to binding.etAmount.text.toString().trim().toDouble()))
+                    .addOnSuccessListener { documentReference ->
+                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w(TAG, "Error adding document", e)
+                    }
+
+
                 addExpenseAuto(expense)
                 binding.etDescription.text?.clear()
                 binding.etAmount.text?.clear()
