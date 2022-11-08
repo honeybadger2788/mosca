@@ -9,11 +9,13 @@ import com.example.mosca.databinding.ActivityRegisterBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 class RegisterActivity: AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
+    private val db = Firebase.firestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,17 @@ class RegisterActivity: AppCompatActivity() {
                         auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    startActivity(Intent(this@RegisterActivity, AuthActivity::class.java))
+                                    db.collection("users")
+                                        .document(email).set(hashMapOf(
+                                        "rol" to "user",
+                                    ))
+                                        .addOnSuccessListener {
+                                            startActivity(Intent(this@RegisterActivity,
+                                                AuthActivity::class.java))
+                                    }
+                                        .addOnFailureListener { e ->
+                                            showMessage(e.message.toString())
+                                        }
                                 } else {
                                     showMessage(task.exception?.message.toString())
                                 }
