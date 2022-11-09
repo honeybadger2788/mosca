@@ -43,17 +43,16 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         binding.btnAdd.setOnClickListener {
             if (binding.etDescription.text.toString().isNotBlank()
                 && binding.etAmount.text.toString().isNotBlank()) {
-                val expense = Expense(
-                    description = binding.etDescription.text.toString().trim(),
-                    amount = binding.etAmount.text.toString().trim().toDouble()
-                )
-
-                val email = auth.currentUser!!.email.toString()
-                db.collection("users").document(email)
+                db.collection("users").document(auth.currentUser!!.email.toString())
                     .collection("expenses")
                     .add(hashMapOf("description" to binding.etDescription.text.toString().trim(),
                         "amount" to binding.etAmount.text.toString().trim().toDouble()))
                     .addOnSuccessListener {
+                        val expense = Expense(
+                            uid = it.id,
+                            description = binding.etDescription.text.toString().trim(),
+                            amount = binding.etAmount.text.toString().trim().toDouble()
+                        )
                         addExpenseAuto(expense)
                         showMessage("Operación exitosa")
                         binding.etDescription.text?.clear()
@@ -82,6 +81,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     println(data.documents)
                     data.documents.forEach { document ->
                         addExpenseAuto(Expense(
+                            document.id,
                             document.get("description") as String,
                             document.get("amount") as Double))
                     }
@@ -118,6 +118,22 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         builder.create().show()
     }
 
+    override fun onClick(expense: Expense, currentAdapter: ExpensesAdapter) {
+        val builder = AlertDialog.Builder(this)
+            .setTitle("¿Editar gasto?")
+            .setPositiveButton("Aceptar",{ dialogInterface, i ->
+                db.collection("users").document(auth.currentUser!!.email.toString())
+                    .collection("expenses").document(expense.uid).get()
+                    .addOnSuccessListener {
+                        binding.etDescription.setText(it.get("description") as String)
+                    }
+            })
+            .setNegativeButton("Cancelar",null)
+
+        builder.create().show()
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_menu,menu)
         return super.onCreateOptionsMenu(menu)
@@ -131,7 +147,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             }
             R.id.action_profile -> {
                 val intent = Intent(this@HomeActivity, UpdatePasswordActivity::class.java)
-                intent.putExtra("email", auth.currentUser!!.email)
+                intent.putExtra("email", auth.currentUser!!.email.toString())
                 startActivity(intent)
             }
         }
