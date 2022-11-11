@@ -25,14 +25,6 @@ class AuthActivity : AppCompatActivity() {
         loginUser()
 
         with(binding){
-            cbRememberme.setOnCheckedChangeListener { _, _ ->
-                if(cbRememberme.isChecked){
-                    showMessage("No me olvides!")
-                } else {
-                    showMessage("Olvidate de mi!")
-                }
-            }
-
             btnRegister.setOnClickListener{
                 startActivity(Intent(this@AuthActivity, RegisterActivity::class.java))
             }

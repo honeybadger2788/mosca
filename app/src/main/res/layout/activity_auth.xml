@@ -60,19 +60,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_default"
             android:text="Login"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <CheckBox
-                android:id="@+id/cbRememberme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Remember me"/>
-        </LinearLayout>
         <Button
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
@@ -80,19 +67,4 @@
             android:text="Register"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
     </LinearLayout>
-
-    <!--<LinearLayout
-        android:id="@+id/llRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/llLogin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center">
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Register"
-            style="@style/Widget.MaterialComponents.Button.TextButton"/>
-    </LinearLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>
