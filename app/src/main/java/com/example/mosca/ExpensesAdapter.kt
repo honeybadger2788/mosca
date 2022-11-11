@@ -27,8 +27,8 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listene
         holder.setListener(expense)
 
         with(holder.binding){
-            tvCategory.text = expense.description
-            tvCategoryAmount.text = expense.amount.toString()
+            tvExpense.text = expense.description
+            tvExpenseAmount.text = expense.amount.toString()
             if (expense.amount < 0){
                 val outcomeIcon = getDrawable(context,R.drawable.ic_arrow_downward)
                 imgCategory.setImageDrawable(outcomeIcon)

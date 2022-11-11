@@ -18,25 +18,25 @@
         app:tint="@color/amber_700"/>
 
     <TextView
-        android:id="@+id/tvCategory"
+        android:id="@+id/tvExpense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/common_padding_min"
         android:textAppearance="?attr/textAppearanceListItem"
         tools:text="Expense"
         app:layout_constraintStart_toEndOf="@+id/imgCategory"
-        app:layout_constraintEnd_toStartOf="@+id/tvCategoryAmount"
+        app:layout_constraintEnd_toStartOf="@+id/tvExpenseAmount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
-        android:id="@+id/tvCategoryAmount"
+        android:id="@+id/tvExpenseAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/common_padding_min"
         android:textAppearance="?attr/textAppearanceListItem"
         tools:text="$0.00"
-        app:layout_constraintStart_toEndOf="@+id/tvCategory"
+        app:layout_constraintStart_toEndOf="@+id/tvExpense"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>

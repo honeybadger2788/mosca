@@ -40,6 +40,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             adapter = expensesAdapter
         }
 
+        // POR AHORA SOLO CREA DOCUMENTOS NUEVOS, NO EDITA EXISTENTES
         binding.btnAdd.setOnClickListener {
             if (binding.etDescription.text.toString().isNotBlank()
                 && binding.etAmount.text.toString().isNotBlank()) {
@@ -110,8 +111,12 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         val builder = AlertDialog.Builder(this)
             .setTitle("¿Eliminar gasto?")
             .setPositiveButton("Aceptar",{ dialogInterface, i ->
-                deleteExpenseAuto(expense)
-                showMessage("Eliminado exitosamente")
+                db.collection("users").document(auth.currentUser!!.email.toString())
+                    .collection("expenses").document(expense.uid).delete()
+                    .addOnSuccessListener {
+                        deleteExpenseAuto(expense)
+                        showMessage("Eliminado exitosamente")
+                    }
             })
             .setNegativeButton("Cancelar",null)
 
@@ -125,7 +130,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                 db.collection("users").document(auth.currentUser!!.email.toString())
                     .collection("expenses").document(expense.uid).get()
                     .addOnSuccessListener {
-                        binding.etDescription.setText(it.get("description") as String)
+                        binding.etDescription.setText(it.getString("description"))
+                        binding.etAmount.setText(it.getDouble("amount").toString())
                     }
             })
             .setNegativeButton("Cancelar",null)
