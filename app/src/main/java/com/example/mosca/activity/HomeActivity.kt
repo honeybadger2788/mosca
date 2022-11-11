@@ -110,14 +110,14 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     override fun onLongClick(expense: Expense, currentAdapter: ExpensesAdapter) {
         val builder = AlertDialog.Builder(this)
             .setTitle("¿Eliminar gasto?")
-            .setPositiveButton("Aceptar",{ dialogInterface, i ->
+            .setPositiveButton("Aceptar") { _, _ ->
                 db.collection("users").document(auth.currentUser!!.email.toString())
                     .collection("expenses").document(expense.uid).delete()
                     .addOnSuccessListener {
                         deleteExpenseAuto(expense)
                         showMessage("Eliminado exitosamente")
                     }
-            })
+            }
             .setNegativeButton("Cancelar",null)
 
         builder.create().show()
@@ -126,14 +126,14 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     override fun onClick(expense: Expense, currentAdapter: ExpensesAdapter) {
         val builder = AlertDialog.Builder(this)
             .setTitle("¿Editar gasto?")
-            .setPositiveButton("Aceptar",{ dialogInterface, i ->
+            .setPositiveButton("Aceptar") { _, _ ->
                 db.collection("users").document(auth.currentUser!!.email.toString())
                     .collection("expenses").document(expense.uid).get()
                     .addOnSuccessListener {
                         binding.etDescription.setText(it.getString("description"))
                         binding.etAmount.setText(it.getDouble("amount").toString())
                     }
-            })
+            }
             .setNegativeButton("Cancelar",null)
 
         builder.create().show()
