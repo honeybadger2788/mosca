@@ -36,8 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:padding="@dimen/common_padding_default">
+            android:gravity="center_vertical">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
@@ -70,7 +69,6 @@
                     android:id="@+id/etAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="@integer/description_max_length"
                     android:inputType="numberDecimal|numberSigned"
                     android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
