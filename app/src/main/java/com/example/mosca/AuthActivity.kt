@@ -1,6 +1,7 @@
 package com.example.mosca
 
 import android.content.Intent
+import android.content.res.Resources.Theme
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mosca.activity.HomeActivity
@@ -16,6 +17,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.Theme_Mosca)
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
