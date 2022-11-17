@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mosca.AuthActivity
+import com.example.mosca.R
 import com.example.mosca.databinding.ActivityRegisterBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -41,7 +42,7 @@ class RegisterActivity: AppCompatActivity() {
                         auth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    db.collection("users")
+                                    db.collection(getString(R.string.key_user_collection))
                                         .document(email).set(hashMapOf(
                                         "rol" to "user",
                                     ))
@@ -58,7 +59,7 @@ class RegisterActivity: AppCompatActivity() {
                             }
                     }
                 } else {
-                    showMessage("Las contraseñas no coinciden")
+                    etConfirmPassword.error = getString(R.string.validation_password_confirm)
                 }
             }
         }

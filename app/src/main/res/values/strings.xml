@@ -12,4 +12,10 @@
     <string name="validation_field_required">Campo requerido</string>
     <string name="logout_title">Cerrar sesión</string>
     <string name="update_password_title">Cambiar contraseña</string>
+    <string name="key_user_collection">users</string>
+    <string name="key_expense_collection">expenses</string>
+    <string name="msg_success_response">Operación exitosa</string>
+    <string name="key_email">email</string>
+    <string name="validation_password_confirm">Las contraseñas no coinciden</string>
+    <string name="msg_error_response">Algo salió mal</string>
 </resources>

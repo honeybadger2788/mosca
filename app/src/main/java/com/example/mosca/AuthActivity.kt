@@ -56,7 +56,7 @@ class AuthActivity : AppCompatActivity() {
                                 showMessage(task.exception?.message.toString())
                         }
                 } else {
-                    showMessage("Algo salió mal")
+                    showMessage(getString(R.string.msg_error_response))
                 }
             }
         }

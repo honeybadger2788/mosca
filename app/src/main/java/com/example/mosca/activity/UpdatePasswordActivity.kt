@@ -3,6 +3,7 @@ package com.example.mosca.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.example.mosca.R
 import com.example.mosca.databinding.ActivityUpdatePasswordBinding
 
 class UpdatePasswordActivity : AppCompatActivity() {
@@ -14,7 +15,7 @@ class UpdatePasswordActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        binding.tvEmail.text = intent.extras!!.getString("email")
+        binding.tvEmail.text = intent.extras!!.getString(R.string.key_email.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -26,6 +26,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     private lateinit var expensesAdapter: ExpensesAdapter
     private val db = Firebase.firestore
     private var budget = 0.00
+    private val currentUser = Firebase.auth.currentUser?.email.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,42 +42,45 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         }
 
         // POR AHORA SOLO CREA DOCUMENTOS NUEVOS, NO EDITA EXISTENTES
-        binding.btnAdd.setOnClickListener {
-            if (binding.etDescription.text.toString().isNotBlank()
-                && binding.etAmount.text.toString().isNotBlank()) {
-                db.collection("users").document(auth.currentUser!!.email.toString())
-                    .collection("expenses")
-                    .add(hashMapOf("description" to binding.etDescription.text.toString().trim(),
-                        "amount" to binding.etAmount.text.toString().trim().toDouble()))
-                    .addOnSuccessListener {
-                        val expense = Expense(
-                            uid = it.id,
-                            description = binding.etDescription.text.toString().trim(),
-                            amount = binding.etAmount.text.toString().trim().toDouble()
-                        )
-                        addExpenseAuto(expense)
-                        showMessage("Operación exitosa")
-                        binding.etDescription.text?.clear()
-                        binding.etAmount.text?.clear()
-                    }
-                    .addOnFailureListener { e ->
-                        showMessage(e.message.toString())
-                    }
-            } else if (binding.etDescription.text.toString().isBlank())
-                binding.etDescription.error = getString(R.string.validation_field_required)
-            else
-                binding.etAmount.error = getString(R.string.validation_field_required)
+        with(binding){
+            btnAdd.setOnClickListener {
+                if (etDescription.text.toString().isNotBlank()
+                    && etAmount.text.toString().isNotBlank()) {
+                    db.collection(getString(R.string.key_user_collection)).document(currentUser)
+                        .collection(getString(R.string.key_expense_collection))
+                        .add(hashMapOf("description" to etDescription.text.toString().trim(),
+                            "amount" to etAmount.text.toString().trim().toDouble()))
+                        .addOnSuccessListener {
+                            val expense = Expense(
+                                uid = it.id,
+                                description = etDescription.text.toString().trim(),
+                                amount = etAmount.text.toString().trim().toDouble()
+                            )
+                            addExpenseAuto(expense)
+                            showMessage(getString(R.string.msg_success_response))
+                            etDescription.text?.clear()
+                            etAmount.text?.clear()
+                        }
+                        .addOnFailureListener { e ->
+                            showMessage(e.message.toString())
+                        }
+                } else if (etDescription.text.toString().isBlank())
+                    etDescription.error = getString(R.string.validation_field_required)
+                else
+                    etAmount.error = getString(R.string.validation_field_required)
+            }
         }
     }
 
+    // Error: se duplican los valores al volver atrás
     override fun onStart() {
         super.onStart()
         getData()
     }
 
     private fun getData() {
-        db.collection("users").document(auth.currentUser!!.email.toString())
-            .collection("expenses").get()
+        db.collection(getString(R.string.key_user_collection)).document(currentUser)
+            .collection(getString(R.string.key_expense_collection)).get()
             .addOnSuccessListener { data ->
                 if (data != null) {
                     println(data.documents)
@@ -111,11 +115,11 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         val builder = AlertDialog.Builder(this)
             .setTitle("¿Eliminar gasto?")
             .setPositiveButton("Aceptar") { _, _ ->
-                db.collection("users").document(auth.currentUser!!.email.toString())
-                    .collection("expenses").document(expense.uid).delete()
+                db.collection(getString(R.string.key_user_collection)).document(currentUser)
+                    .collection(getString(R.string.key_expense_collection)).document(expense.uid).delete()
                     .addOnSuccessListener {
                         deleteExpenseAuto(expense)
-                        showMessage("Eliminado exitosamente")
+                        showMessage(getString(R.string.msg_success_response))
                     }
             }
             .setNegativeButton("Cancelar",null)
@@ -127,8 +131,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         val builder = AlertDialog.Builder(this)
             .setTitle("¿Editar gasto?")
             .setPositiveButton("Aceptar") { _, _ ->
-                db.collection("users").document(auth.currentUser!!.email.toString())
-                    .collection("expenses").document(expense.uid).get()
+                db.collection(getString(R.string.key_user_collection)).document(currentUser)
+                    .collection(getString(R.string.key_expense_collection)).document(expense.uid).get()
                     .addOnSuccessListener {
                         binding.etDescription.setText(it.getString("description"))
                         binding.etAmount.setText(it.getDouble("amount").toString())
@@ -153,7 +157,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             }
             R.id.action_profile -> {
                 val intent = Intent(this@HomeActivity, UpdatePasswordActivity::class.java)
-                intent.putExtra("email", auth.currentUser!!.email.toString())
+                intent.putExtra(getString(R.string.key_email), currentUser)
                 startActivity(intent)
             }
         }
