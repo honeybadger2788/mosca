@@ -48,8 +48,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     && etAmount.text.toString().isNotBlank()) {
                     db.collection(getString(R.string.key_user_collection)).document(currentUser)
                         .collection(getString(R.string.key_expense_collection))
-                        .add(hashMapOf("description" to etDescription.text.toString().trim(),
-                            "amount" to etAmount.text.toString().trim().toDouble()))
+                        .add(hashMapOf(getString(R.string.key_description_field) to etDescription.text.toString().trim(),
+                            getString(R.string.key_amount_field) to etAmount.text.toString().trim().toDouble()))
                         .addOnSuccessListener {
                             val expense = Expense(
                                 uid = it.id,
@@ -87,15 +87,15 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     data.documents.forEach { document ->
                         addExpenseAuto(Expense(
                             document.id,
-                            document.get("description") as String,
-                            document.get("amount") as Double))
+                            document.get(getString(R.string.key_description_field)) as String,
+                            document.get(getString(R.string.key_amount_field)) as Double))
                     }
                 } else {
-                    Log.d(TAG, "No such document")
+                    showMessage(getString(R.string.msg_error_response))
                 }
             }
             .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
+                showMessage(exception.toString())
             }
     }
 
@@ -113,8 +113,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
 
     override fun onLongClick(expense: Expense, currentAdapter: ExpensesAdapter) {
         val builder = AlertDialog.Builder(this)
-            .setTitle("¿Eliminar gasto?")
-            .setPositiveButton("Aceptar") { _, _ ->
+            .setTitle(getString(R.string.alert_delete_title))
+            .setPositiveButton(getString(R.string.text_accept)) { _, _ ->
                 db.collection(getString(R.string.key_user_collection)).document(currentUser)
                     .collection(getString(R.string.key_expense_collection)).document(expense.uid).delete()
                     .addOnSuccessListener {
@@ -122,23 +122,23 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                         showMessage(getString(R.string.msg_success_response))
                     }
             }
-            .setNegativeButton("Cancelar",null)
+            .setNegativeButton(getString(R.string.text_cancel),null)
 
         builder.create().show()
     }
 
     override fun onClick(expense: Expense, currentAdapter: ExpensesAdapter) {
         val builder = AlertDialog.Builder(this)
-            .setTitle("¿Editar gasto?")
-            .setPositiveButton("Aceptar") { _, _ ->
+            .setTitle(getString(R.string.alert_edit_title))
+            .setPositiveButton(getString(R.string.text_accept)) { _, _ ->
                 db.collection(getString(R.string.key_user_collection)).document(currentUser)
                     .collection(getString(R.string.key_expense_collection)).document(expense.uid).get()
                     .addOnSuccessListener {
-                        binding.etDescription.setText(it.getString("description"))
-                        binding.etAmount.setText(it.getDouble("amount").toString())
+                        binding.etDescription.setText(it.getString(getString(R.string.key_description_field)))
+                        binding.etAmount.setText(it.getDouble(getString(R.string.key_amount_field)).toString())
                     }
             }
-            .setNegativeButton("Cancelar",null)
+            .setNegativeButton(getString(R.string.text_cancel),null)
 
         builder.create().show()
     }
