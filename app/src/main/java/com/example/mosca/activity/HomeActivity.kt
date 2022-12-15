@@ -1,9 +1,7 @@
 package com.example.mosca.activity
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
@@ -46,24 +44,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             btnAdd.setOnClickListener {
                 if (etDescription.text.toString().isNotBlank()
                     && etAmount.text.toString().isNotBlank()) {
-                    db.collection(getString(R.string.key_user_collection)).document(currentUser)
-                        .collection(getString(R.string.key_expense_collection))
-                        .add(hashMapOf(getString(R.string.key_description_field) to etDescription.text.toString().trim(),
-                            getString(R.string.key_amount_field) to etAmount.text.toString().trim().toDouble()))
-                        .addOnSuccessListener {
-                            val expense = Expense(
-                                uid = it.id,
-                                description = etDescription.text.toString().trim(),
-                                amount = etAmount.text.toString().trim().toDouble()
-                            )
-                            addExpenseAuto(expense)
-                            showMessage(getString(R.string.msg_success_response))
-                            etDescription.text?.clear()
-                            etAmount.text?.clear()
-                        }
-                        .addOnFailureListener { e ->
-                            showMessage(e.message.toString())
-                        }
+                    createExpense(etDescription.text.toString().trim(),etAmount.text.toString().trim().toDouble())
                 } else if (etDescription.text.toString().isBlank())
                     etDescription.error = getString(R.string.validation_field_required)
                 else
@@ -99,6 +80,29 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             }
     }
 
+    private fun createExpense(description: String, amount: Double) {
+        with(binding){
+            db.collection(getString(R.string.key_user_collection)).document(currentUser)
+                .collection(getString(R.string.key_expense_collection))
+                .add(hashMapOf(getString(R.string.key_description_field) to description,
+                    getString(R.string.key_amount_field) to amount))
+                .addOnSuccessListener {
+                    val expense = Expense(
+                        uid = it.id,
+                        description = description,
+                        amount = amount
+                    )
+                    addExpenseAuto(expense)
+                    showMessage(getString(R.string.msg_success_response))
+                    etDescription.text?.clear()
+                    etAmount.text?.clear()
+                }
+                .addOnFailureListener { e ->
+                    showMessage(e.message.toString())
+                }
+        }
+    }
+
     private fun addExpenseAuto(expense: Expense) {
         budget += expense.amount
         binding.tvAmount.text = "$ $budget"
@@ -131,12 +135,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         val builder = AlertDialog.Builder(this)
             .setTitle(getString(R.string.alert_edit_title))
             .setPositiveButton(getString(R.string.text_accept)) { _, _ ->
-                db.collection(getString(R.string.key_user_collection)).document(currentUser)
-                    .collection(getString(R.string.key_expense_collection)).document(expense.uid).get()
-                    .addOnSuccessListener {
-                        binding.etDescription.setText(it.getString(getString(R.string.key_description_field)))
-                        binding.etAmount.setText(it.getDouble(getString(R.string.key_amount_field)).toString())
-                    }
+                binding.etDescription.setText(expense.description)
+                binding.etAmount.setText(expense.amount.toString())
             }
             .setNegativeButton(getString(R.string.text_cancel),null)
 
