@@ -67,4 +67,8 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listene
         expenseList.remove(expense)
         notifyDataSetChanged()
     }
+
+    fun edit() {
+        notifyDataSetChanged()
+    }
 }

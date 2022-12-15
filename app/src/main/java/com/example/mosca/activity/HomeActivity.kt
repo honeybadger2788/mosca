@@ -43,9 +43,15 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         with(binding){
             btnAdd.setOnClickListener {
                 if (etDescription.text.toString().isNotBlank()
-                    && etAmount.text.toString().isNotBlank()) {
-                    createExpense(etDescription.text.toString().trim(),etAmount.text.toString().trim().toDouble())
-                } else if (etDescription.text.toString().isBlank())
+                    && etAmount.text.toString().isNotBlank() && tvId.text.toString() == "0")
+                    createExpense(etDescription.text.toString().trim(),
+                        etAmount.text.toString().trim().toDouble())
+                else if (etDescription.text.toString().isNotBlank()
+                    && etAmount.text.toString().isNotBlank() && tvId.text.toString() != "0")
+                    editExpense(tvId.text.toString(),
+                        etDescription.text.toString().trim(),
+                        etAmount.text.toString().trim().toDouble())
+                else if (etDescription.text.toString().isBlank())
                     etDescription.error = getString(R.string.validation_field_required)
                 else
                     etAmount.error = getString(R.string.validation_field_required)
@@ -103,6 +109,30 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         }
     }
 
+    private fun editExpense(uid: String, description: String, amount: Double) {
+        with(binding){
+            db.collection(getString(R.string.key_user_collection)).document(currentUser)
+                .collection(getString(R.string.key_expense_collection)).document(uid)
+                .set(hashMapOf(getString(R.string.key_description_field) to description,
+                    getString(R.string.key_amount_field) to amount))
+                .addOnSuccessListener {
+                    val expense = Expense(
+                        uid = uid,
+                        description = description,
+                        amount = amount
+                    )
+                    editExpenseAuto(expense)
+                    showMessage(getString(R.string.msg_success_response))
+                    tvId.text = 0.toString()
+                    etDescription.text?.clear()
+                    etAmount.text?.clear()
+                }
+                .addOnFailureListener { e ->
+                    showMessage(e.message.toString())
+                }
+        }
+    }
+
     private fun addExpenseAuto(expense: Expense) {
         budget += expense.amount
         binding.tvAmount.text = "$ $budget"
@@ -112,7 +142,18 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     private fun deleteExpenseAuto(expense: Expense) {
         budget -= expense.amount
         binding.tvAmount.text = "$ $budget"
-       expensesAdapter.remove(expense)
+        expensesAdapter.remove(expense)
+    }
+
+    private fun editExpenseAuto(expense: Expense) {
+        budget += expense.amount
+        binding.tvAmount.text = "$ $budget"
+        expensesAdapter.edit()
+        updateUI()
+    }
+
+    private fun updateUI() {
+        getData()
     }
 
     override fun onLongClick(expense: Expense, currentAdapter: ExpensesAdapter) {
@@ -120,7 +161,8 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             .setTitle(getString(R.string.alert_delete_title))
             .setPositiveButton(getString(R.string.text_accept)) { _, _ ->
                 db.collection(getString(R.string.key_user_collection)).document(currentUser)
-                    .collection(getString(R.string.key_expense_collection)).document(expense.uid).delete()
+                    .collection(getString(R.string.key_expense_collection)).document(expense.uid)
+                    .delete()
                     .addOnSuccessListener {
                         deleteExpenseAuto(expense)
                         showMessage(getString(R.string.msg_success_response))
@@ -135,6 +177,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
         val builder = AlertDialog.Builder(this)
             .setTitle(getString(R.string.alert_edit_title))
             .setPositiveButton(getString(R.string.text_accept)) { _, _ ->
+                binding.tvId.text = expense.uid
                 binding.etDescription.setText(expense.description)
                 binding.etAmount.setText(expense.amount.toString())
             }
