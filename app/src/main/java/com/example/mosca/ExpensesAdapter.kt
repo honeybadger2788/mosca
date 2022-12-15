@@ -53,7 +53,6 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listene
             }
             binding.root.setOnClickListener {
                 listener.onClick(expense, this@ExpensesAdapter)
-                true
             }
         }
     }
