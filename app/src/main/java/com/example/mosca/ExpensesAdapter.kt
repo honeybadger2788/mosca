@@ -68,7 +68,4 @@ class ExpensesAdapter(var expenseList: MutableList<Expense>, private val listene
         notifyDataSetChanged()
     }
 
-    fun edit() {
-        notifyDataSetChanged()
-    }
 }

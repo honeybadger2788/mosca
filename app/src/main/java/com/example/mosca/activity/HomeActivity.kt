@@ -38,6 +38,7 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
             layoutManager = LinearLayoutManager(this@HomeActivity)
             adapter = expensesAdapter
         }
+        getData()
 
         // POR AHORA SOLO CREA DOCUMENTOS NUEVOS, NO EDITA EXISTENTES
         with(binding){
@@ -57,12 +58,6 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                     etAmount.error = getString(R.string.validation_field_required)
             }
         }
-    }
-
-    // Error: se duplican los valores al volver atrás
-    override fun onStart() {
-        super.onStart()
-        getData()
     }
 
     private fun getData() {
@@ -148,12 +143,11 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
     private fun editExpenseAuto(expense: Expense) {
         budget += expense.amount
         binding.tvAmount.text = "$ $budget"
-        expensesAdapter.edit()
         updateUI()
     }
 
     private fun updateUI() {
-        getData()
+        recreate()
     }
 
     override fun onLongClick(expense: Expense, currentAdapter: ExpensesAdapter) {
