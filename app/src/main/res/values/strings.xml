@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Mosca</string>
     <string name="hint_email">Email</string>
-    <string name="help_require">Obligatorio</string>
+    <string name="help_require">Required</string>
     <string name="hint_password">Password</string>
     <string name="hint_confirm_password">Confirm password</string>
     <string name="register_title">Register</string>
@@ -9,19 +9,22 @@
     <string name="expenses">Expenses</string>
     <string name="home_title">Home</string>
     <string name="hint_amount">$</string>
-    <string name="validation_field_required">Campo requerido</string>
-    <string name="logout_title">Cerrar sesión</string>
-    <string name="update_password_title">Cambiar contraseña</string>
+    <string name="validation_field_required">Required</string>
+    <string name="logout_title">Logout</string>
     <string name="key_user_collection">users</string>
     <string name="key_expense_collection">expenses</string>
-    <string name="msg_success_response">Operación exitosa</string>
+    <string name="msg_success_response">Successful operation</string>
     <string name="key_email">email</string>
-    <string name="validation_password_confirm">Las contraseñas no coinciden</string>
-    <string name="msg_error_response">Algo salió mal</string>
+    <string name="validation_password_confirm">Passwords do not match</string>
+    <string name="msg_error_response">Something went wrong</string>
     <string name="key_description_field">description</string>
     <string name="key_amount_field">amount</string>
-    <string name="text_accept">Aceptar</string>
-    <string name="text_cancel">Cancelar</string>
-    <string name="alert_delete_title">¿Eliminar gasto?</string>
-    <string name="alert_edit_title">¿Editar gasto?</string>
+    <string name="text_accept">Accept</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="alert_delete_title">¿Delete expense?</string>
+    <string name="alert_edit_title">¿Edit expense?</string>
+    <string name="text_login">Login</string>
+    <string name="text_register">Register</string>
+    <string name="text_budget">Budget:</string>
+    <string name="text_expenses">Expenses:</string>
 </resources>
