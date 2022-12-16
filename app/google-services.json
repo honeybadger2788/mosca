@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "42506321025",
+    "project_id": "rational-logic-302820",
+    "storage_bucket": "rational-logic-302820.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42506321025:android:90a03f2984f729d8b82180",
+        "android_client_info": {
+          "package_name": "com.example.mosca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42506321025-he13tgsbnfj5ijop4os8kjel5asr30t6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwA3Ye6h2vY09xbWyz9mmBb4o67JYrPjY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42506321025-he13tgsbnfj5ijop4os8kjel5asr30t6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

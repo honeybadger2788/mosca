@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Mosca</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="help_require">Obligatorio</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_confirm_password">Confirmar contraseña</string>
+    <string name="register_title">Registrate</string>
+    <string name="hint_description">Descripción</string>
+    <string name="expenses">Gastos</string>
+    <string name="home_title">Home</string>
+    <string name="hint_amount">$</string>
+    <string name="validation_field_required">Campo obligatorio</string>
+    <string name="logout_title">Cerrar sesión</string>
+    <string name="key_user_collection">users</string>
+    <string name="key_expense_collection">expenses</string>
+    <string name="msg_success_response">Operación exitosa</string>
+    <string name="key_email">email</string>
+    <string name="validation_password_confirm">Contraseñas no coinciden</string>
+    <string name="msg_error_response">Algo salió mal</string>
+    <string name="key_description_field">description</string>
+    <string name="key_amount_field">amount</string>
+    <string name="text_accept">Aceptar</string>
+    <string name="text_cancel">Cancelar</string>
+    <string name="alert_delete_title">¿Eliminar gasto?</string>
+    <string name="alert_edit_title">¿Editar gasto?</string>
+    <string name="text_login">Iniciar sesión</string>
+    <string name="text_register">Registrate</string>
+    <string name="text_budget">Presupuesto:</string>
+    <string name="text_expenses">Gastos:</string>
+</resources>
