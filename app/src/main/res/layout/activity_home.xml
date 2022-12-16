@@ -63,7 +63,7 @@
                     android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
             <Space
-                android:layout_width="@dimen/common_padding_default"
+                android:layout_width="@dimen/common_padding_min"
                 android:layout_height="match_parent"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="0dp"
@@ -79,21 +79,23 @@
                     android:inputType="numberDecimal|numberSigned"
                     android:imeOptions="actionDone"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <Space
+                android:layout_width="@dimen/common_padding_min"
+                android:layout_height="match_parent"/>
             <ImageButton
                 android:id="@+id/btnAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/common_padding_default"
-                android:background="?attr/selectableItemBackground"
-                android:src="@drawable/ic_add_box"
-                app:tint="?attr/colorSecondaryVariant"/>
+                android:src="@drawable/ic_add"
+                android:backgroundTint="?attr/colorSecondaryVariant"
+                app:tint="@color/white"/>
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/text_expenses"
-            android:padding="@dimen/common_padding_min"
+            android:padding="@dimen/common_padding_default"
             android:textAppearance="?attr/textAppearanceOverline"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvExpenses"
