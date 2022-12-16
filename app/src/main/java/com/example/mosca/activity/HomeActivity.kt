@@ -192,11 +192,6 @@ class HomeActivity: AppCompatActivity(), OnClickListener {
                 auth.signOut()
                 onBackPressedDispatcher.onBackPressed()
             }
-            R.id.action_profile -> {
-                val intent = Intent(this@HomeActivity, UpdatePasswordActivity::class.java)
-                intent.putExtra(getString(R.string.key_email), currentUser)
-                startActivity(intent)
-            }
         }
         return super.onOptionsItemSelected(item)
     }

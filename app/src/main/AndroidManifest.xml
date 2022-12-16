@@ -16,9 +16,6 @@
         android:theme="@style/Theme.Mosca"
         tools:targetApi="31">
         <activity
-            android:name=".activity.UpdatePasswordActivity"
-            android:exported="false"/>
-        <activity
             android:name=".activity.RegisterActivity"
             android:exported="false"/>
         <activity
